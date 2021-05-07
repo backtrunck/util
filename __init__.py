@@ -1,6 +1,7 @@
 import re, os, string, locale, datetime, sys, traceback
 from gtin import GTIN
 from bradocs4py import ValidadorChaveAcessoNFe
+from unicodedata import normalize
 
 check_key_nfce = ValidadorChaveAcessoNFe.validar
 
@@ -11,7 +12,8 @@ descritores_moeda = {   "Real":\
                                 'separador_decimal':','\
                             }}
 
-def check_gtin(product_code, length=13): 
+
+def check_gtin(product_code, length=13):
     '''
         Verifica se um codigo gtim esta correto
     '''
@@ -23,6 +25,9 @@ def check_gtin(product_code, length=13):
         return True
     else:
         return False
+
+def remover_acentos(txt):
+   return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
     
 def string_to_tupledate(date_str, formato=2):
     '''
