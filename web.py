@@ -116,6 +116,7 @@ class SiteScraper(object):
             caps['general.useragent.override'] = self.USER_AGENT
             if self.USE_SERVER:
                 #conecta via servidor (rodar o jar antes)
+                #java -jar ./bin/selenium-server-standalone-3.141.59.jar (#blackbox)
                 caps = DesiredCapabilities.FIREFOX.copy()
                 caps['general.useragent.override'] = self.USER_AGENT
                 caps['browserName'] = 'firefox'
