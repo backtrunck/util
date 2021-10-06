@@ -239,6 +239,13 @@ def eh_valor_monetario(valor_moeda="",descritor_moeda="Real"):
     else:
         return 0
 
+def obter_informacoes_erro(e):
+    '''
+    Obtem informacoes sobre um exceção disparada tipo, descricao,arquivo e número da linha
+    '''
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    return f' Erro: "{exc_obj}", Tipo: {exc_type}, Arquivo: {fname}, linha: {exc_tb.tb_lineno}, name: {exc_tb.tb_frame.f_code.co_name}'
 
 def obter_nome_arquivo_e_extensao(nome_arquivo):
     ''' Obtem o nome do arquivo e da extensão do arquivo passado como parâmetro
