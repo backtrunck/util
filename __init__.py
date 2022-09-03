@@ -5,8 +5,7 @@ import re
 import string
 import sys
 import traceback
-from bradocs4py import ValidadorChaveAcessoNFe
-from gtin import GTIN
+
 from unicodedata import normalize
 
 # pega uma dos seguintes padrões de sequencias 'municipal' ou 'mun' ou 'mun.' ou 'munic.' ou 'munic'
@@ -25,7 +24,7 @@ PDR_TIPO_NORMATIVO = '((?i:lei)|(?i:decreto)|(?i:portaria)|(?i:intrução normat
 
 PDR_NORMATIVO = re.compile(f'{PDR_TIPO_NORMATIVO}\s+({PDR_ESFERA_LEGAL}\s+)?((nº|n\.|num|num\.)\s+)?{PDR_NUM_NORMATIVO}{PDR_NUM_NORMATIVO}?')
 
-check_key_nfce = ValidadorChaveAcessoNFe.validar
+
 
 descritores_moeda = {   "Real":\
                             {  'simbolo_monetario':"$", \
@@ -33,22 +32,6 @@ descritores_moeda = {   "Real":\
                                 'separador_milhar':'.', \
                                 'separador_decimal':','\
                             }}
-
-
-def check_gtin(product_code, length=13):
-    '''
-        Verifica se um codigo gtim esta correto
-    '''
-    if len(product_code) == 13:
-        try:
-            #biblioteca GTIN com problemas
-            return True
-            GTIN(product_code, length)
-        except Exception:
-            return False
-        return True
-    else:
-        return False
 
 def remover_acentos(txt):
    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
