@@ -1,5 +1,6 @@
 import datetime
 import locale
+import math
 import os 
 import re
 import string
@@ -32,6 +33,15 @@ descritores_moeda = {   "Real":\
                                 'separador_milhar':'.', \
                                 'separador_decimal':','\
                             }}
+
+
+
+def normal_round(n, decimals=0):
+    # https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers
+    expoN = n * 10 ** decimals
+    if abs(expoN) - abs(math.floor(expoN)) < 0.5:
+        return math.floor(expoN) / 10 ** decimals
+    return math.ceil(expoN) / 10 ** decimals
 
 def remover_acentos(txt):
    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
