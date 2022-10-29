@@ -4,7 +4,9 @@ from logging.handlers import RotatingFileHandler
 def set_loggers(log,level = logging.INFO,log_filename=''):
     '''
     Configura o log da aplicação. Um handler de arquivo e um para o terminal
-    :param level: Nivel do log (DEBUG,INFO,CRITICAL,ERROR,etc)
+    :param level: Nivel do log (DEBUG, INFO, CRITICAL, ERROR, etc)
+    :param log_filename: (string) nome do arquivo onde os logs vão ser gravados. Caso não seja passado
+    os logs vão ser mostrados somente na tela.
     :return: None
     '''
     log.setLevel(level)

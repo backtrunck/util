@@ -45,6 +45,28 @@ def normal_round(n, decimals=0):
 
 def remover_acentos(txt):
    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
+
+def remove_accent_characters(old):
+    """
+    https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string
+    Removes common accent characters, lower form.
+    Uses: regex.
+    """
+    # new = old.lower()
+
+    new = re.sub(r'[ÀÁÂÃ]', 'A', old)
+    new = re.sub(r'[àáâã]', 'a', new)
+    new = re.sub(r'[ÈÉÊẼ]', 'E', new)
+    new = re.sub(r'[èéêẽ]', 'e', new)
+    new = re.sub(r'[ÌÍÎĨ]', 'I', new)
+    new = re.sub(r'[ìíîĩ]', 'i', new)
+    new = re.sub(r'[ÒÓÔÕ]', 'O', new)
+    new = re.sub(r'[òóôõ]', 'o', new)
+    new = re.sub(r'[ÚÚÛŨ]', 'U', new)
+    new = re.sub(r'[ùúûũ]', 'u', new)
+    new = re.sub(r'[Ç]', 'C', new)
+    new = re.sub(r'[ç]', 'c', new)
+    return new
     
 def string_to_tupledate(date_str, formato=2):
     '''
