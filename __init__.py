@@ -327,6 +327,21 @@ def retirar_pontuacao(texto):
             texto_sem_pontuacao +=  caracter
     return texto_sem_pontuacao
 
+def substituir_caracteres(texto, caracteres_a_remover, caracter_substituto=' '):
+    """
+    substitui, na variável texto, todos os caracteres contidos em caracteres_a_remover pelo caracter_substituto
+    Param:
+    texto: string: texto q vai ser trabalhado
+    caracteres_a_remover: string: Esta variavel conterá os caracteres que devem ser substituidos em texto
+    caracter_substituto: string: Esta variável conterá o caracter que vai substituir os caracteres_a_remover de texto
+    return: (string): retorna o texto com os caracteres substituidos
+    """
+
+    for c in caracteres_a_remover:
+        if texto.find(c) != -1:
+            texto = texto.replace(c, caracter_substituto)
+    return texto
+
 def traceback_to_list(obj_exception, obj_traceback=None):
     if not obj_traceback:
         obj_traceback = obj_exception.__traceback__
