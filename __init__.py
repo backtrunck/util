@@ -330,12 +330,20 @@ def obter_arquivos(caminho, extensao):
     return arquivos
 
     
-def retirar_pontuacao(texto):
+def retirar_pontuacao(texto, retirar_carateres=None):
+    """
+    Retira caracteres de pontuação de texto exceto os em retirar_caracter (string)
+    """
+    pontuacao = string.punctuation
     texto_sem_pontuacao = ''
+    if retirar_carateres:
+        for caracter in retirar_carateres:
+            pontuacao = pontuacao.replace(caracter,'')
     for caracter in texto:
-        if caracter not in string.punctuation:
-            texto_sem_pontuacao +=  caracter
+        if caracter not in pontuacao:
+            texto_sem_pontuacao += caracter
     return texto_sem_pontuacao
+
 
 def substituir_caracteres(texto, caracteres_a_remover, caracter_substituto=' '):
     """
