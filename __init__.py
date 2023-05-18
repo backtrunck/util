@@ -211,9 +211,19 @@ def formatar_moeda(valor, localizacao = 'pt_BR.utf8', separador_milhar = True, s
     valor = locale.currency(valor, grouping = separador_milhar, symbol = simbolo_moeda)
     return valor
 
+
 def desformatar_moeda(valor_str,localizacao = 'pt_BR.utf8'):
     locale.setlocale(locale.LC_ALL, localizacao)
     return locale.delocalize(valor_str)
+
+
+def desformatar_moeda_cifra(valor_str, localizacao='pt_BR.utf8'):
+    valor = desformatar_moeda(valor_str, localizacao=localizacao)
+    valor = valor.replace('R$', '').strip()
+    if valor.find('-') != -1:
+        valor = valor.replace('-', '')
+        valor = '-' + valor.strip()
+    return valor
 
 def formatar_data(date_time, format = '%A %d de %B de %Y, %H:%M:%S', local = 'pt_BR.utf8'):
     '''
