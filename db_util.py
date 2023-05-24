@@ -6,10 +6,10 @@ from subprocess import PIPE, CalledProcessError, run as run_program
 
 def login_mysql(database, host='localhost'):
     """
-    Utiliza o mysqlclient para simular um login no banco de dados utilizando a biblioteca subprocess. Pode ser utilizado
+    Utiliza o mysqlclient para simular um login no banco de dados_testes utilizando a biblioteca subprocess. Pode ser utilizado
     para validar um usuário e senha do mysql antes da execução de scrits no bd.
-    param: database: (string) nome do banco de dados no mysql.
-    param: host: (string) endereço ip do banco de dados.
+    param: database: (string) nome do banco de dados_testes no mysql.
+    param: host: (string) endereço ip do banco de dados_testes.
     Return: (tuple(string,string) se a senha, usuário e database forem válidos retorna uma tupla com o usurio e senha.
     Caso não seja válido retorna uma tupla com (None, None).
     """
