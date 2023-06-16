@@ -37,6 +37,12 @@ descritores_moeda = {"Real": \
 class ErrorTotaisInconsistentes(Exception):
     pass
 
+
+def definir_largura_colunas_xlsx(planilha,tamanhos):
+    pos_A = ord('A')
+    for i in range(tamanhos):
+        planilha.column_dimensions[chr(pos_A + i)].width = tamanhos(i)
+
 def normal_round(n, decimals=0):
     # https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers
     expoN = n * 10 ** decimals
@@ -110,6 +116,19 @@ def string_to_tupledate(date_str, formato=2):
         else:
             month, day, year = date_str.split('-')
     return (year, month, day,)
+
+
+def somar_dicionarios(dict_acumulado, novo_dict):
+    """
+    Soma dois dicionarios. acumulando a soma no primeiro dicionario passado. Caso o primeiro dicionario seja vazio.
+    Copia o segundo no primeiro.
+    """
+    # se o dicionário que vai acumular valores for vazio. Atualiza suas chaves com o novo dicionario
+    if dict_acumulado:
+        for key in dict_acumulado:
+            dict_acumulado[key] += novo_dict[key]
+    else:
+        dict_acumulado.update(novo_dict)
 
 
 def string_to_date(date_str, format=2):
@@ -279,6 +298,9 @@ def converte_monetario_float(valor_monetario, descritor_moeda="Real"):
                 * multiplicador
 
         return float(valor_monetario) * multiplicador
+    else:
+        # se não for valor monetário retorna zero
+        return 0.0
 
 
 def eh_valor_monetario(valor_moeda="", descritor_moeda="Real"):

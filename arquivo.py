@@ -1,6 +1,29 @@
 import os
+import platform
 
 from zipfile import ZipFile, ZIP_DEFLATED
+
+LINUX_SYSTEM = False if platform.platform().lower().find('linux') == -1 else True
+
+if LINUX_SYSTEM:
+    import fcntl
+else:
+    import msvcrt
+
+def lock_file(arquivo):
+    if LINUX_SYSTEM:
+        fcntl.flock(arquivo, fcntl.LOCK_EX)
+    else:
+        msvcrt.locking(arquivo.fileno(), msvcrt.LK_RLCK, 1)
+        print('lock_file')
+
+
+def unlock_file(arquivo):
+
+    if LINUX_SYSTEM:
+        fcntl.flock(arquivo, fcntl.LOCK_UN)
+    else:
+        msvcrt.locking(arquivo.fileno(), msvcrt.LK_UNLCK, 1)
 
 
 class GerenciadorArquivos(object):
