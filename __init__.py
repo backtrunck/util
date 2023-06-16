@@ -37,12 +37,6 @@ descritores_moeda = {"Real": \
 class ErrorTotaisInconsistentes(Exception):
     pass
 
-
-def definir_largura_colunas_xlsx(planilha, larguras):
-    pos_A = ord('A')
-    for i, largura in enumerate(larguras):
-        planilha.column_dimensions[chr(pos_A + i)].width = largura
-
 def normal_round(n, decimals=0):
     # https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers
     expoN = n * 10 ** decimals
