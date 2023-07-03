@@ -37,6 +37,27 @@ descritores_moeda = {"Real": \
 class ErrorTotaisInconsistentes(Exception):
     pass
 
+
+def definir_largura_colunas_xlsx(planilha,tamanhos):
+    pos_A = ord('A')
+    for i in range(tamanhos):
+        planilha.column_dimensions[chr(pos_A + i)].width = tamanhos(i)
+
+
+def decodificar_payload_request_do_javafaces(payload):
+    """
+    Pega um payload gerado por uma aplicação java server page e transforma num dicionario.
+    """
+    from urllib.parse import unquote
+    payload_text = ''
+    textos = unquote(payload)
+    textos = textos.split('&')
+    for texto in textos:
+        key, value = texto.split('=')
+        payload_text += f'"{key}": "{value}"\n'
+
+    print(payload_text)
+
 def normal_round(n, decimals=0):
     # https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers
     expoN = n * 10 ** decimals
