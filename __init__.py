@@ -10,21 +10,21 @@ import traceback
 from unicodedata import normalize
 
 # pega uma dos seguintes padrões de sequencias 'municipal' ou 'mun' ou 'mun.' ou 'munic.' ou 'munic'
-PDR_ESFERA_MUN = '(?i:municipal)|(?i:mun)|(?i:mun\.)|(?i:munic\.)|(?i:munic)'
+PDR_ESFERA_MUN = r'(?i:municipal)|(?i:mun)|(?i:mun\.)|(?i:munic\.)|(?i:munic)'
 # pega uma dos seguintes padrões de sequencias 'estadual' ou 'est' ou 'est.'
-PDR_ESFERA_EST = '(?i:estadual)|(?i:est)|(?i:est\.)'
+PDR_ESFERA_EST = r'(?i:estadual)|(?i:est)|(?i:est\.)'
 # pega uma dos seguintes padrões de sequencias 'federal' ou 'fed' ou 'fed.' ou 'nacional' ou 'nac.'
-PDR_ESFERA_NAC = '(?i:federal)|(?i:fed)|(?i:fed\.)|(?i:nacional)|(?i:nac\.)'
+PDR_ESFERA_NAC = r'(?i:federal)|(?i:fed)|(?i:fed\.)|(?i:nacional)|(?i:nac\.)'
 # junção dos padrões MUN, EST e NAC
 PDR_ESFERA_LEGAL = '(' + PDR_ESFERA_MUN + '|' + PDR_ESFERA_EST + '|' + PDR_ESFERA_NAC + ')'
 # pega o padrão do número do normativo. Ex: 15.278.
-PDR_NUM_NORMATIVO = '((\d{1,3}\.)*\d{1,3})'
-PDR_ANO_NORMATIVO = '(/\d{2,4})'
+PDR_NUM_NORMATIVO = r'((\d{1,3}\.)*\d{1,3})'
+PDR_ANO_NORMATIVO = r'(/\d{2,4})'
 # pega o padrão para tipos de normaitos: leis , decretos portaria
 PDR_TIPO_NORMATIVO = '((?i:lei)|(?i:decreto)|(?i:portaria)|(?i:intrução normativa)|(?i:in))'
 
 PDR_NORMATIVO = re.compile(
-    f'{PDR_TIPO_NORMATIVO}\s+({PDR_ESFERA_LEGAL}\s+)?((nº|n\.|num|num\.)\s+)?{PDR_NUM_NORMATIVO}{PDR_NUM_NORMATIVO}?')
+    fr'{PDR_TIPO_NORMATIVO}\s+({PDR_ESFERA_LEGAL}\s+)?((nº|n\.|num|num\.)\s+)?{PDR_NUM_NORMATIVO}{PDR_NUM_NORMATIVO}?')
 
 descritores_moeda = {"Real": \
                          {'simbolo_monetario': "$", \
