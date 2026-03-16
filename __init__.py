@@ -1,3 +1,4 @@
+import decimal
 import datetime
 import locale
 import math
@@ -356,6 +357,25 @@ def obter_nome_arquivo_e_extensao(nome_arquivo):
         return nome_sem_extensao, extensao
     else:
         return partes_nome_arquivo, ''  # Retorna string nula como extensão, caso o arquivo não tenha extensão
+
+def obter_unidades_medidas(texto):
+    """
+    Função obtem do texto as unidades de medidas citadas como l, ml, kg, mg
+    :param texto: texto a ser analisado
+    :return: uma lista de tuplas com a quantidade e a medida respectiva: Ex  [(500.0, 'g'), (1.5, 'l'), (250.0, 'ml'),
+    (2.2, 'kg')]
+    """
+    # O sinal re.IGNORECASE faz com que ele aceite 'ML', 'Kg', etc.
+    padrao = r'(\d+(?:[.,]\d+)?)\s*(ml|l|g|kg|mg)\b'
+    matches = re.findall(padrao, texto, re.IGNORECASE)
+
+    resultados = []
+    for valor, unidade in matches:
+        # Converte vírgula em ponto
+        valor_decimal = decimal.Decimal(valor.replace(',', '.'))
+        resultados.append((valor_decimal, unidade.lower()))
+    return resultados
+
 
 
 def print_same_line(msg):
