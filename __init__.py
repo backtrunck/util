@@ -366,14 +366,21 @@ def obter_unidades_medidas(texto):
     (2.2, 'kg')]
     """
     # O sinal re.IGNORECASE faz com que ele aceite 'ML', 'Kg', etc.
-    padrao = r'(\d+(?:[.,]\d+)?)\s*(ml|l|g|kg|mg)\b'
+    padrao = r'(\d+(?:[.,]\d+)?)?\s*(ml|l|g|kg|mg)\b'
     matches = re.findall(padrao, texto, re.IGNORECASE)
 
     resultados = []
     for valor, unidade in matches:
-        # Converte vírgula em ponto
-        valor_decimal = decimal.Decimal(valor.replace(',', '.'))
-        resultados.append((valor_decimal, unidade.lower()))
+        unidade_lower = unidade.lower()
+
+        if valor:
+            # Código 1: Quantidade e Medida encontradas
+            valor_decimal = decimal.Decimal(valor.replace(',', '.'))
+            resultados.append((valor_decimal, unidade_lower))
+        else:
+            # Código 2: Apenas Medida encontrada (Quantidade é None)
+            resultados.append((decimal.Decimal('1.0'), unidade_lower))
+
     return resultados
 
 
